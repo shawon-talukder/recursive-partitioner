@@ -1,12 +1,12 @@
-import { createContext, useContext, useState } from "react";
+/* eslint-disable react/prop-types */
+import { createContext, useState } from "react";
 
 import { NodeTree } from "../lib/nodeTree";
 import { getRandomColor } from "../utils/services";
 
 
-const NodeContext = createContext();
+export const NodeContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const NodeContextProvider = ({ children }) => {
     const [data, setData] = useState(new NodeTree(1, getRandomColor()));
 
@@ -32,11 +32,5 @@ export const NodeContextProvider = ({ children }) => {
         </NodeContext.Provider>
     )
 
-};
-
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useNodeContext = () => {
-    return useContext(NodeContext)
 };
 
