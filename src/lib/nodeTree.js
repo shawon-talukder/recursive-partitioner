@@ -7,8 +7,8 @@ export class NodeTree {
     }
 
     addChildren(leftId, leftColor, rightId, rightColor) {
-        this.leftChild = new Node(leftId, leftColor);
-        this.rightChild = new Node(rightId, rightColor);
+        this.leftChild = new NodeTree(leftId, leftColor);
+        this.rightChild = new NodeTree(rightId, rightColor);
     }
 
     findNodeByID(id) {
@@ -28,7 +28,7 @@ export class NodeTree {
         return null;
     }
 
-    findAndAddChildrenById(id, leftId, leftColor, rightId, rightColor) {
+    findAndAddChildrenById({ id, leftId, leftColor, rightId, rightColor }) {
         const targetNode = this.findNodeByID(id);
 
         if (targetNode !== null) {
