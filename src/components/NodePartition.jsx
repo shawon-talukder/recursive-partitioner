@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import ButtonGroup from "./ButtonGroup";
 
 const NodePartition = ({ id, color, rightChild, leftChild }) => {
-    const [direction, setDirection] = useState("root");
+    const [direction, setDirection] = useState("row");
     const [dir, setDir] = useState(direction);
 
     useEffect(() => {
-        if (direction === "root" || direction === "row") {
+        if (direction === "row") {
             setDir("flex-row");
         } else {
             setDir("flex-col");
@@ -21,7 +21,7 @@ const NodePartition = ({ id, color, rightChild, leftChild }) => {
                 <div className={`flex-1 ${color}`}>
                     <ButtonGroup
                         id={id}
-                        isRoot={id === "001" || direction === "root"}
+                        isRoot={id === "001"}
                         setDirection={setDirection}
                     />
                 </div>
