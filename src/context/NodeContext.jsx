@@ -8,7 +8,7 @@ export const NodeContext = createContext();
 
 export const NodeContextProvider = ({ children }) => {
     const [data, setData] = useState(new NodeTree("001", "bg-lime-200"));
-    
+    const [needFetch, setNeedFetch] = useState(false);
 
     const addChildNodesById = useCallback(
         ({ targetId, leftId, leftColor, rightId, rightColor }) => {
@@ -22,6 +22,7 @@ export const NodeContextProvider = ({ children }) => {
 
             if (updatedData) {
                 setData(updatedData);
+                setNeedFetch(true);
             }
         },
         [data]
@@ -36,7 +37,7 @@ export const NodeContextProvider = ({ children }) => {
         return deleted;
     };
     return (
-        <NodeContext.Provider value={{ data, addChildNodesById, deleteNodeById }}>
+        <NodeContext.Provider value={{ data, needFetch, setNeedFetch, addChildNodesById, deleteNodeById }}>
             {children}
         </NodeContext.Provider>
     );
