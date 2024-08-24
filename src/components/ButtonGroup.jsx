@@ -1,26 +1,53 @@
 import PropTypes from "prop-types";
-import Button from './Button';
 
-const ButtonGroup = ({ isRoot }) => {
+import useNodeContext from "../context/useNodeContext";
+import Button from "./Button";
+
+const ButtonGroup = ({ id, isRoot, setDirection }) => {
+    const { addChildNodesById } = useNodeContext();
+
+    const handleAddChild = (dir, id) => {
+        // @TODO: change hardcoded data
+        const childData = {
+            leftId: "002",
+            leftColor: "bg-red-200",
+            rightId: "003",
+            rightColor: "bg-orange-200",
+        };
+
+        addChildNodesById({ targetId: id, ...childData });
+
+        if (dir === "H") setDirection("row");
+        else setDirection("col");
+    };
     return (
-        <div className="inline-flex rounded-md shadow-sm" role="group">
-            <Button
-                label="H"
-                handleClick={() => { console.log("horizontal something") }}
-                classes={"border rounded-s-lg"} />
-            <Button
-                label="V"
-                handleClick={() => { console.log("vertical something") }}
-                classes={"border-t border-b"} />
-            <Button
-                label="-"
-                handleClick={() => { console.log("remove something") }}
-                classes={"border rounded-e-lg "}
-                isDisabled={isRoot} />
+        <div className="flex w-full h-full justify-center items-center">
+            <div className="inline-flex rounded-md shadow-sm" role="group">
+                <Button
+                    label="H"
+                    handleClick={() => handleAddChild("H", id)}
+                    classes={"border rounded-s-lg"}
+                />
+                <Button
+                    label="V"
+                    handleClick={() => handleAddChild("V", id)}
+                    classes={"border-t border-b"}
+                />
+                <Button
+                    label="-"
+                    handleClick={() => {
+                        console.log("remove something", id);
+                    }}
+                    classes={"border rounded-e-lg "}
+                    isDisabled={isRoot}
+                />
+            </div>
         </div>
-    )
-}
+    );
+};
 ButtonGroup.propTypes = {
-    isRoot: PropTypes.bool
-}
-export default ButtonGroup
+    id: PropTypes.string,
+    isRoot: PropTypes.bool,
+    setDirection: PropTypes.func,
+};
+export default ButtonGroup;
