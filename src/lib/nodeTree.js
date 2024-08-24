@@ -31,9 +31,9 @@ export class NodeTree {
     findAndAddChildrenById({ id, leftId, leftColor, rightId, rightColor }) {
         const targetNode = this.findNodeByID(id);
 
-        if (targetNode !== null) {
+        if (targetNode !== null && targetNode instanceof NodeTree) {
             targetNode.addChildren(leftId, leftColor, rightId, rightColor);
-            return true;
+            return this;
         }
 
         return false;
