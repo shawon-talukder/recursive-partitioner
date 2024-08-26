@@ -7,7 +7,7 @@ import useNodeContext from "../context/useNodeContext";
 import Button from "./Button";
 
 const ButtonGroup = ({ id, isRoot, setDirection }) => {
-    const { addChildNodesById } = useNodeContext();
+    const { addChildNodesById, deleteNodeById } = useNodeContext();
 
     const handleAddChild = (dir, id) => {
         const childData = {
@@ -16,11 +16,15 @@ const ButtonGroup = ({ id, isRoot, setDirection }) => {
             rightId: uuidv4(),
             rightColor: getRandomColor(),
         };
-        
+
         addChildNodesById({ targetId: id, ...childData });
 
         if (dir === "H") setDirection("row");
         else setDirection("col");
+    };
+
+    const handleDelete = (id) => {
+        deleteNodeById(id);
     };
     return (
         <div className="flex w-full h-full justify-center items-center">
@@ -37,9 +41,7 @@ const ButtonGroup = ({ id, isRoot, setDirection }) => {
                 />
                 <Button
                     label="-"
-                    handleClick={() => {
-                        console.log("remove something", id);
-                    }}
+                    handleClick={() => handleDelete(id)}
                     classes={"border rounded-e-lg "}
                     isDisabled={isRoot}
                 />

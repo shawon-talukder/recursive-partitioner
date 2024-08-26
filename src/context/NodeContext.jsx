@@ -29,14 +29,13 @@ export const NodeContextProvider = ({ children }) => {
         [data]
     );
 
-    const deleteNodeById = (id) => {
-        const updatedRoot = { ...data };
-        const deleted = updatedRoot.deleteChildById(id);
-        if (deleted) {
-            setData(updatedRoot);
+    const deleteNodeById = useCallback((id) => {
+        const updatedData = data.findAndDeleteNodeByID(id);
+        if (updatedData) {
+            setNeedFetch(true);
         }
-        return deleted;
-    };
+    }, [data]);
+
     return (
         <NodeContext.Provider
             value={{
