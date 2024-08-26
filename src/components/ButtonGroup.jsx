@@ -1,4 +1,7 @@
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
+
+import { getRandomColor } from "../utils/services";
 
 import useNodeContext from "../context/useNodeContext";
 import Button from "./Button";
@@ -7,14 +10,13 @@ const ButtonGroup = ({ id, isRoot, setDirection }) => {
     const { addChildNodesById } = useNodeContext();
 
     const handleAddChild = (dir, id) => {
-        // @TODO: change hardcoded data
         const childData = {
-            leftId: "002",
-            leftColor: "bg-red-200",
-            rightId: "003",
-            rightColor: "bg-orange-200",
+            leftId: uuidv4(),
+            leftColor: getRandomColor(),
+            rightId: uuidv4(),
+            rightColor: getRandomColor(),
         };
-
+        
         addChildNodesById({ targetId: id, ...childData });
 
         if (dir === "H") setDirection("row");
