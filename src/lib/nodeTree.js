@@ -51,13 +51,13 @@ export class NodeTree {
         }
 
         if (this.leftChild) {
-            const leftDeleted = this.leftChild.findAndDeleteByID(id);
+            const leftDeleted = this.leftChild.findAndDeleteNodeByID(id);
 
             if (leftDeleted) return true;
         }
 
         if (this.rightChild) {
-            const rightDeleted = this.rightChild.findAndDeleteByID(id);
+            const rightDeleted = this.rightChild.findAndDeleteNodeByID(id);
 
             if (rightDeleted) return true;
         }
