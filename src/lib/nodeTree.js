@@ -42,24 +42,24 @@ export class NodeTree {
     findAndDeleteNodeByID(id) {
         if (this.leftChild && this.leftChild.id === id) {
             this.leftChild = null;
-            return true;
+            return this;
         }
 
         if (this.rightChild && this.rightChild.id === id) {
             this.rightChild = null;
-            return true;
+            return this;
         }
 
         if (this.leftChild) {
             const leftDeleted = this.leftChild.findAndDeleteNodeByID(id);
 
-            if (leftDeleted) return true;
+            if (leftDeleted) return this;
         }
 
         if (this.rightChild) {
             const rightDeleted = this.rightChild.findAndDeleteNodeByID(id);
 
-            if (rightDeleted) return true;
+            if (rightDeleted) return this;
         }
 
         return false;
