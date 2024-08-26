@@ -1,11 +1,19 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import ButtonGroup from "./ButtonGroup";
 
 const NodePartition = ({ id, color, rightChild, leftChild }) => {
     const [direction, setDirection] = useState("row");
     const [dir, setDir] = useState(direction);
+
+    const colorRef = useRef(null);
+
+    useEffect(() => {
+        if (color) {
+            colorRef.current.style.backgroundColor = color;
+        }
+    }, [color]);
 
     useEffect(() => {
         if (direction === "row") {
@@ -18,7 +26,7 @@ const NodePartition = ({ id, color, rightChild, leftChild }) => {
     return (
         <div className={`flex ${dir} justify-between h-full w-full`}>
             {(!leftChild || !rightChild) && (
-                <div className={`flex-1 ${color}`}>
+                <div ref={colorRef} className={`flex-1`}>
                     <ButtonGroup
                         id={id}
                         isRoot={id === "001"}
