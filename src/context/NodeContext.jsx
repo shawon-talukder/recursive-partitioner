@@ -1,13 +1,14 @@
- 
 import PropTypes from "prop-types";
 import { createContext, useCallback, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 import { NodeTree } from "../lib/nodeTree";
+import { getRandomColor } from "../utils/services";
 
 export const NodeContext = createContext();
 
 export const NodeContextProvider = ({ children }) => {
-    const [data, setData] = useState(new NodeTree("001", "bg-lime-200"));
+    const [data, setData] = useState(new NodeTree(uuid(), getRandomColor()));
     const [needFetch, setNeedFetch] = useState(false);
 
     const addChildNodesById = useCallback(
@@ -37,12 +38,20 @@ export const NodeContextProvider = ({ children }) => {
         return deleted;
     };
     return (
-        <NodeContext.Provider value={{ data, needFetch, setNeedFetch, addChildNodesById, deleteNodeById }}>
+        <NodeContext.Provider
+            value={{
+                data,
+                needFetch,
+                setNeedFetch,
+                addChildNodesById,
+                deleteNodeById,
+            }}
+        >
             {children}
         </NodeContext.Provider>
     );
 };
 
 NodeContextProvider.propTypes = {
-    children: PropTypes.element
-}
+    children: PropTypes.element,
+};
