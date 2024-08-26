@@ -14,7 +14,6 @@ export class NodeTree {
     findNodeByID(id) {
         if (this.id === id) return this;
 
-
         if (this.leftChild !== null) {
             const left = this.leftChild.findNodeByID(id);
             if (left !== null) return left;
@@ -42,26 +41,26 @@ export class NodeTree {
     findAndDeleteNodeByID(id) {
         if (this.leftChild && this.leftChild.id === id) {
             this.leftChild = null;
-            return this;
+            return true;
         }
 
         if (this.rightChild && this.rightChild.id === id) {
             this.rightChild = null;
-            return this;
+            return true;
         }
 
         if (this.leftChild) {
             const leftDeleted = this.leftChild.findAndDeleteNodeByID(id);
 
-            if (leftDeleted) return this;
+            if (leftDeleted) return true;
         }
 
         if (this.rightChild) {
             const rightDeleted = this.rightChild.findAndDeleteNodeByID(id);
 
-            if (rightDeleted) return this;
+            if (rightDeleted) return true;
         }
 
         return false;
-    };
-};
+    }
+}
