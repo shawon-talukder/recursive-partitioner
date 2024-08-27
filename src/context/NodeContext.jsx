@@ -8,7 +8,7 @@ import { getRandomColor } from "../utils/services";
 export const NodeContext = createContext();
 
 export const NodeContextProvider = ({ children }) => {
-    const [data, setData] = useState(new NodeTree(uuid(), getRandomColor()));
+    const [data, setData] = useState(new NodeTree(uuid(), getRandomColor(), true));
     const [needFetch, setNeedFetch] = useState(false);
 
     const addChildNodesById = useCallback(

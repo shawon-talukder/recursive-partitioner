@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import NodePartition from "./components/NodePartition";
 import useNodeContext from "./context/useNodeContext";
 
@@ -18,6 +19,7 @@ function App() {
       <NodePartition
         id={nodeData.id}
         color={nodeData.color}
+        root={nodeData.root}
         leftChild={nodeData.leftChild}
         rightChild={nodeData.rightChild}
       />

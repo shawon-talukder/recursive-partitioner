@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import ButtonGroup from "./ButtonGroup";
 
-const NodePartition = ({ id, color, rightChild, leftChild }) => {
+const NodePartition = ({ id, color, root, rightChild, leftChild }) => {
     const [direction, setDirection] = useState("row");
     const [dir, setDir] = useState(direction);
 
@@ -25,11 +25,11 @@ const NodePartition = ({ id, color, rightChild, leftChild }) => {
 
     return (
         <div className={`flex ${dir} justify-between h-full w-full`}>
-            {(!leftChild || !rightChild) && (
+            {!leftChild && !rightChild && (
                 <div ref={colorRef} className={`flex-1`}>
                     <ButtonGroup
                         id={id}
-                        isRoot={id === "001"}
+                        isRoot={root}
                         setDirection={setDirection}
                     />
                 </div>
@@ -59,6 +59,7 @@ const NodePartition = ({ id, color, rightChild, leftChild }) => {
 NodePartition.propTypes = {
     id: PropTypes.string,
     color: PropTypes.string,
+    root: PropTypes.bool,
     leftChild: PropTypes.object || null,
     rightChild: PropTypes.object || null,
 };
