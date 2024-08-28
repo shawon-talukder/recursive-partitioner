@@ -1,5 +1,5 @@
 export class NodeTree {
-    constructor(id, color, root=false) {
+    constructor(id, color, root = false) {
         this.id = id;
         this.color = color;
         this.root = root;

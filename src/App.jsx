@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     if (needFetch) {
       setNodeData(data);
-      setNeedFetch((prev)=> !prev);
+      setNeedFetch((prev) => !prev);
     }
   }, [needFetch, data, setNeedFetch]);
 
