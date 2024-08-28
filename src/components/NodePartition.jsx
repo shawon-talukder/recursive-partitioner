@@ -10,9 +10,19 @@ const NodePartition = ({ id, color, root, rightChild, leftChild }) => {
     const colorRef = useRef(null);
 
     useEffect(() => {
-        if (color) {
-            colorRef.current.style.backgroundColor = color;
+        // Store the current ref in a variable
+        const currentRef = colorRef.current;
+    
+        if (currentRef && color) {
+            currentRef.style.backgroundColor = color;
         }
+    
+        // Cleanup function
+        return () => {
+            if (currentRef) {
+                currentRef.style.backgroundColor = null;
+            }
+        };
     }, [color]);
 
     useEffect(() => {
@@ -34,15 +44,6 @@ const NodePartition = ({ id, color, root, rightChild, leftChild }) => {
                     />
                 </div>
             )}
-            {rightChild && (
-                <NodePartition
-                    key={rightChild.id}
-                    id={rightChild.id}
-                    color={rightChild.color}
-                    leftChild={rightChild.leftChild}
-                    rightChild={rightChild.rightChild}
-                />
-            )}
             {leftChild && (
                 <NodePartition
                     key={leftChild.id}
@@ -50,6 +51,15 @@ const NodePartition = ({ id, color, root, rightChild, leftChild }) => {
                     color={leftChild.color}
                     leftChild={leftChild.leftChild}
                     rightChild={leftChild.rightChild}
+                />
+            )}
+            {rightChild && (
+                <NodePartition
+                    key={rightChild.id}
+                    id={rightChild.id}
+                    color={rightChild.color}
+                    leftChild={rightChild.leftChild}
+                    rightChild={rightChild.rightChild}
                 />
             )}
         </div>
